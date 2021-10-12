@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+// Import Modules
+import React, { useState } from "react";
+import TodoItem from "./components/TodoItem/TodoItem";
+import TodoForm from "./components/TodoForm/TodoForm";
+import "./App.css";
 
+// Import Components
 function App() {
+  const [todos, setTodos] = useState([
+    "Learn about React",
+    "Meet friend for lunch",
+    "Build really cool todo app",
+  ]);
+
+  const addTodo = (text) => {
+    const newTodos = [...todos, text];
+
+    setTodos(newTodos);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <div className="app">
+    <div className="todo-list">
+    <h1>My Todo list</h1>
+    {todos.map((todo, index) => (
+      <TodoItem todo={todo} />
+    ))}
+    <TodoForm addTodo={addTodo} />
+  </div>
+  </div>
   );
 }
-
 export default App;
